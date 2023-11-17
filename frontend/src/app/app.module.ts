@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
+import {AppRoutingModule}  from "./app-routing.module";
 import {BrowserModule} from "@angular/platform-browser";
-import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {CardComponent} from "./components/card/card.component";
 import {CreateComponent} from "./components/create/create.component";
@@ -15,8 +15,8 @@ import {MainComponent} from "./components/main/main.component";
     MainComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     FormsModule
   ],
   providers: [],
