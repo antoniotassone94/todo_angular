@@ -15,9 +15,9 @@ import {MainComponent} from "./components/main/main.component";
     MainComponent
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [MainComponent]
