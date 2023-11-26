@@ -1,18 +1,14 @@
-import {Schema, model} from 'mongoose'
-import dotenv from 'dotenv'
+import {Schema,model} from "mongoose";
 
-
-dotenv.config()
+const appModel = new Schema<AppSchema>({
+    text: {type:String,required:true},
+    completed: {type:Boolean,required:true,default:false}
+})
 
 export interface AppSchema{
-    save(): AppSchema | PromiseLike<AppSchema | null> | null
+    save(): AppSchema|PromiseLike<AppSchema|null> | null
     text: String
     completed: Boolean
 }
 
-const appModel = new Schema<AppSchema>({
-    text: {type: String, required: true},
-    completed: {type: Boolean, required: true, default: false}
-})
-
-export const App = model<AppSchema>('app', appModel)
+export const App = model<AppSchema>("app",appModel)

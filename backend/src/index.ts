@@ -1,11 +1,19 @@
-import express from 'express'
-import { app } from './app';
+import express from "express";
+import cors from "cors";
+import {app} from "./app";
 
 const server = express();
-server.use(app)
+server.use(cors());
+server.use(express.json());
 
+server.use("/app",app);
+
+server.get("/",(req,res) => {
+    res.send("Hello world!");
+});
 
 const PORT = 4000;
-server.listen(PORT, ()=> {
-    console.log(`server is running on http://localhost:${PORT} 🚀`)
-})
+
+server.listen(PORT,() => {
+    console.log(`server is running on the port ${PORT} 🚀`)
+});

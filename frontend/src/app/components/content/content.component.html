@@ -1,4 +1,4 @@
 <ul>
-  <li *ngFor="let card of getList()"><app-card [message]="card"></app-card></li>
+  <li *ngFor="let card of getList()"><app-card [todo]="card"></app-card></li>
 </ul>
-<app-create (message)="managerCreation($event)"></app-create>
+<app-create (todoCreated)="managerCreation($event)"></app-create>

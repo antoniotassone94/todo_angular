@@ -1,29 +1,45 @@
 import {Component,OnInit} from "@angular/core";
+import {HttpErrorResponse} from "@angular/common/http";
+import {HttpRequestService} from "../../services/httprequest.service";
+import {environment} from "../../../environments/environment";
+import {ToDoModel} from "../../models/todo";
 
 @Component({
   selector: "app-content",
   templateUrl: "./content.component.html",
-  styleUrls: ["./content.component.css"]
+  styleUrl: "./content.component.css"
 })
 
 export class ContentComponent implements OnInit{
-  private list:string[] = [];
+  private list:ToDoModel[] = [];
 
-  constructor(){}
+  constructor(private httprequest:HttpRequestService){}
 
   public ngOnInit():void{
-    this.list.push("prova1");
-    this.list.push("prova2");
-    this.list.push("prova3");
-    this.list.push("prova4");
-    this.list.push("prova5");
+    this.httprequest.httpGetRequest(environment.serverUrl + "app").subscribe({
+      next: (response:any) => {
+        for(let i = 0;i < response.result.length;i++){
+          const todo:ToDoModel = new ToDoModel();
+          todo.setText(response.result[i].text);
+          todo.setCompleted(response.result[i].completed);
+          todo.setId(response.result[i]._id);
+          todo.setV(response.result[i].__v);
+          this.list.push(todo);
+        }
+        console.log(response.message);
+      },
+      error: (error:HttpErrorResponse) => {
+        const errorMessage:string = error.statusText + " (" + error.status + ")";
+        console.error(errorMessage);
+      }
+    });
   }
 
-  public getList():string[]{
+  public getList():ToDoModel[]{
     return this.list;
   }
 
-  public managerCreation(event:string):void{
+  public managerCreation(event:ToDoModel):void{
     this.list.push(event);
   }
 }
