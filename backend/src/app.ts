@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import { createContent, deleteContent, getContents, updateContent } from './services/appService';
+import { AppSchema } from './models/model';
 
 
 const app: Router = express.Router();
@@ -8,7 +9,7 @@ app.use(express.json());
 
 app.post('/', async (req, res) => {
     const { text, completed } = req.body;
-    const result = await createContent(text, completed);
+    const result: AppSchema | null = await createContent(text, completed);
     if (!result) {
         res.status(400).send({ msg: 'Bad request, cannot create content', check: false });
     }
@@ -17,7 +18,7 @@ app.post('/', async (req, res) => {
 
 
 app.get('/', async (req, res, next) => {
-    const result = await getContents({});
+    const result: AppSchema |  any = await getContents({});
     if (!result || result.length === 0) {
         res.status(404).send({ msg: 'there are not content', check: false });
         return next();
@@ -29,7 +30,7 @@ app.get('/', async (req, res, next) => {
 app.put('/:id', async (req, res) => {
     const { text, completed } = req.body;
     const { id } = req.params;
-    const result = await updateContent(id, text, completed);
+    const result: AppSchema | null = await updateContent(id, text, completed);
     if (!result) {
         res.status(400).send({ msg: 'Bad request, cannot change content', check: false });
     }
@@ -39,7 +40,7 @@ app.put('/:id', async (req, res) => {
 
 app.delete('/:id', async (req, res) => {
     const { id } = req.params;
-    const result = await deleteContent(id);
+    const result: AppSchema | null = await deleteContent(id);
     if (!result) {
         res.status(400).send({ msg: 'Bad request, cannot delete content', check: false });
     }

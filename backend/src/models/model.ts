@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 export interface AppSchema{
+    save(): AppSchema | PromiseLike<AppSchema | null> | null
     text: String
     completed: Boolean
 }
