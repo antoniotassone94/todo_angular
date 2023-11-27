@@ -50,7 +50,7 @@ export class ContentComponent implements OnInit{
     this.list.push(event);
   }
 
-  public updateContent(event:ToDoModel){
+  public updateContent(event:ToDoModel):void{
     this.httprequest.httpPutRequest(environment.serverUrl + "app/" + event.getId(),{text:event.getText(),completed:!event.getCompleted()}).subscribe({
       next: (response:any) => {
         let i:number = 0;
@@ -69,7 +69,7 @@ export class ContentComponent implements OnInit{
     });
   }
 
-  public deleteContent(event:string){
+  public deleteContent(event:string):void{
     this.httprequest.httpDeleteRequest(environment.serverUrl + "app/" + event,{}).subscribe({
       next: (response:any) => {
         let i:number = 0;

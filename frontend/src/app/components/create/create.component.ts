@@ -25,7 +25,7 @@ export class CreateComponent implements OnInit{
 
   public ngOnInit():void{}
 
-  public createnow(form:NgForm){
+  public createnow(form:NgForm):void{
     if(form.valid){
       this.httprequest.httpPostRequest(environment.serverUrl + "app",{text:form.value.text,completed:false}).subscribe({
         next: (response:any) => {
