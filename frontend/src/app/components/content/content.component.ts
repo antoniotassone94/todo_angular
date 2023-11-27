@@ -1,4 +1,4 @@
-import {Component,OnInit} from "@angular/core";
+import {Component,OnInit,inject} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {HttpRequestService} from "../../services/httprequest.service";
 import {environment} from "../../../environments/environment";
@@ -11,9 +11,13 @@ import {ToDoModel} from "../../models/todo";
 })
 
 export class ContentComponent implements OnInit{
-  private list:ToDoModel[] = [];
+  private list:ToDoModel[];
+  private httprequest:HttpRequestService;
 
-  constructor(private httprequest:HttpRequestService){}
+  constructor(){
+    this.list = [];
+    this.httprequest = inject(HttpRequestService);
+  }
 
   public ngOnInit():void{
     this.httprequest.httpGetRequest(environment.serverUrl + "app").subscribe({
@@ -39,7 +43,15 @@ export class ContentComponent implements OnInit{
     return this.list;
   }
 
-  public managerCreation(event:ToDoModel):void{
+  public createCard(event:ToDoModel):void{
     this.list.push(event);
+  }
+
+  public updateContent(event:ToDoModel){
+    console.log("update",event);
+  }
+
+  public deleteContent(event:string){
+    console.log("delete",event);
   }
 }

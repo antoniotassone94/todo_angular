@@ -1,6 +1,3 @@
-<!-- gestire la funzione completeTodo(formCard) già presente in typescript -->
 <p>{{todo.getText()}}</p>
-<form #formCard="ngForm">
-  <input type="hidden" name="id" id="id" [ngModel]="todo.getId()">
-  <input type="checkbox" name="completed" id="completed" [ngModel]="todo.getCompleted()">
-</form>
+<input type="checkbox" name="completed" id="completed" [ngModel]="todo.getCompleted()" (click)="updateTodo()">
+<button (click)="deleteTodo()">Delete</button>

@@ -1,4 +1,4 @@
-import {Component,EventEmitter,OnInit,Output} from "@angular/core";
+import {Component,EventEmitter,OnInit,Output,inject} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {HttpRequestService} from "../../services/httprequest.service";
@@ -12,9 +12,13 @@ import {ToDoModel} from "../../models/todo";
 })
 
 export class CreateComponent implements OnInit{
-  @Output() todoCreated:EventEmitter<ToDoModel> = new EventEmitter<ToDoModel>();
+  @Output() todoCreated:EventEmitter<ToDoModel>;
+  private httprequest:HttpRequestService;
 
-  constructor(private httprequest:HttpRequestService){}
+  constructor(){
+    this.todoCreated = new EventEmitter<ToDoModel>();
+    this.httprequest = inject(HttpRequestService);
+  }
 
   public ngOnInit():void{}
 

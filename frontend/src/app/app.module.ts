@@ -7,7 +7,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {CardComponent} from "./components/card/card.component";
 import {CreateComponent} from "./components/create/create.component";
 import {ContentComponent} from "./components/content/content.component";
-import {MainComponent} from "./components/main/main.component";
 
 import {HttpRequestService} from "./services/httprequest.service";
 
@@ -15,8 +14,7 @@ import {HttpRequestService} from "./services/httprequest.service";
   declarations: [
     CardComponent,
     CreateComponent,
-    ContentComponent,
-    MainComponent
+    ContentComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +25,7 @@ import {HttpRequestService} from "./services/httprequest.service";
   providers: [
     HttpRequestService
   ],
-  bootstrap: [MainComponent]
+  bootstrap: [ContentComponent]
 })
 
 export class AppModule{}
