@@ -1,14 +1,13 @@
 {
-  "name": "backend",
+  "name": "todo-manager-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "backend for the application to manage a todo list.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon  src/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Antonio Tassone and Rafael Merlotto",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.16",

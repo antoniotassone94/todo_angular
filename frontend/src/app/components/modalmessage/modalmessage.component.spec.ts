@@ -1,0 +1,22 @@
+import {ComponentFixture,TestBed} from "@angular/core/testing";
+import {ModalMessageComponent} from "./modalmessage.component";
+
+describe("ModalMessageComponent", () => {
+  let component: ModalMessageComponent;
+  let fixture: ComponentFixture<ModalMessageComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ModalMessageComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(ModalMessageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
+});
