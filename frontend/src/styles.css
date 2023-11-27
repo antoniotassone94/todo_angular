@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+*{
+    box-sizing: border-box;
+}
+html{
+ height: 100vh; 
+ background: linear-gradient(90deg, rgba(41,196,212,1) 0%, rgba(184, 141, 240, 0.974) 100%);
+}
+
+body{
+   height: 90%;
+   margin: 0;
+  font-family: sans-serif;
+}

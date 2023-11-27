@@ -2,5 +2,5 @@
 <p>{{todo.getText()}}</p>
 <form #formCard="ngForm">
   <input type="hidden" name="id" id="id" [ngModel]="todo.getId()">
-  <input type="checkbox" name="completed" id="completed" [ngModel]="todo.getCompleted()">
+  <input type="checkbox" class="checkbox" name="completed" id="completed" [ngModel]="todo.getCompleted()">
 </form>

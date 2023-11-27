@@ -1,0 +1,10 @@
+p{
+    width: 80%;
+    overflow: auto;
+    margin-left: 5px;
+}
+
+input{
+    width: 20px;
+    height: 20px;
+}

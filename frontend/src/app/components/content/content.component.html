@@ -1,4 +1,4 @@
-<ul>
-  <li *ngFor="let card of getList()"><app-card [todo]="card"></app-card></li>
+<ul class="list">
+  <li *ngFor="let card of getList()" class="content"><app-card [todo]="card"></app-card></li>
 </ul>
 <app-create (todoCreated)="managerCreation($event)"></app-create>
