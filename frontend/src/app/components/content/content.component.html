@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 <ul class="list">
-  <li *ngFor="let card of getList()" class="content"><app-card [todo]="card"></app-card></li>
-=======
-<ul>
-  <li *ngFor="let card of getList()">
+  <li class="content" *ngFor="let card of getList()">
     <app-card
       [todo]="card"
       (update)="updateContent($event)"
       (delete)="deleteContent($event)">
     </app-card>
   </li>
->>>>>>> 32d611d88dbb163edb3be7b3f41a4aca065d1b46
 </ul>
 <app-create (todoCreated)="createCard($event)"></app-create>
