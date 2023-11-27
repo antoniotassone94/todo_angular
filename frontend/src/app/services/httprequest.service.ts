@@ -24,8 +24,4 @@ export class HttpRequestService {
   public httpDeleteRequest(url:string,body:object):Observable<any>{
     return this.httpClient.delete(url,{body:body});
   }
-
-  public httpPatchRequest(url:string,body:object):Observable<any>{
-    return this.httpClient.patch(url,body);
-  }
 }

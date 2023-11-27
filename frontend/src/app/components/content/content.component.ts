@@ -48,10 +48,40 @@ export class ContentComponent implements OnInit{
   }
 
   public updateContent(event:ToDoModel){
-    console.log("update",event);
+    this.httprequest.httpPutRequest(environment.serverUrl + "app/" + event.getId(),{text:event.getText(),completed:!event.getCompleted()}).subscribe({
+      next: (response:any) => {
+        let i:number = 0;
+        while(i < this.list.length && this.list[i].getId() !== event.getId()){
+          i++;
+        }
+        if(i < this.list.length){
+          this.list[i].setCompleted(!this.list[i].getCompleted());
+        }
+        console.log(response.message);
+      },
+      error: (error:HttpErrorResponse) => {
+        const errorMessage:string = error.statusText + " (" + error.status + ")";
+        console.error(errorMessage);
+      }
+    });
   }
 
   public deleteContent(event:string){
-    console.log("delete",event);
+    this.httprequest.httpDeleteRequest(environment.serverUrl + "app/" + event,{}).subscribe({
+      next: (response:any) => {
+        let i:number = 0;
+        while(i < this.list.length && this.list[i].getId() !== event){
+          i++;
+        }
+        if(i < this.list.length){
+          this.list.splice(i,1);
+        }
+        console.log(response.message);
+      },
+      error: (error:HttpErrorResponse) => {
+        const errorMessage:string = error.statusText + " (" + error.status + ")";
+        console.error(errorMessage);
+      }
+    });
   }
 }

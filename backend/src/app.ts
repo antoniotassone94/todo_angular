@@ -29,7 +29,7 @@ app.put("/:id", async (req, res) => {
     if(!result){
         return res.status(500).send({message:"Internal server error while updating the content.",check:false});
     }
-    return res.status(200).send({result:result,message:"Content changed correctly.",check:true});
+    return res.status(200).send({message:"Content changed correctly.",check:true});
 })
 
 app.delete("/:id",async (req,res) => {
@@ -38,7 +38,7 @@ app.delete("/:id",async (req,res) => {
     if(!result){
         return res.status(500).send({message:"Internal server error while deleting the content.",check:false});
     }
-    return res.status(200).send({result:result,message:"Content deleted correctly.",check:true});
+    return res.status(200).send({message:"Content deleted correctly.",check:true});
 })
 
 export {app}
