@@ -1,8 +1,9 @@
-import {Component,OnInit} from "@angular/core";
+import {Component,OnInit,inject} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {HttpRequestService} from "../../services/httprequest.service";
-import {environment} from "../../../environments/environment";
+import {DialogManagerService} from "../../services/dialogmanager.service";
 import {ToDoModel} from "../../models/todo";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: "app-content",
@@ -11,9 +12,15 @@ import {ToDoModel} from "../../models/todo";
 })
 
 export class ContentComponent implements OnInit{
-  private list:ToDoModel[] = [];
+  private list:ToDoModel[];
+  private httprequest:HttpRequestService;
+  private dialogmanager:DialogManagerService;
 
-  constructor(private httprequest:HttpRequestService){}
+  constructor(){
+    this.list = [];
+    this.httprequest = inject(HttpRequestService);
+    this.dialogmanager = inject(DialogManagerService);
+  }
 
   public ngOnInit():void{
     this.httprequest.httpGetRequest(environment.serverUrl + "app").subscribe({
@@ -26,11 +33,11 @@ export class ContentComponent implements OnInit{
           todo.setV(response.result[i].__v);
           this.list.push(todo);
         }
-        console.log(response.message);
+        this.dialogmanager.openDialog(response.message);
       },
       error: (error:HttpErrorResponse) => {
         const errorMessage:string = error.statusText + " (" + error.status + ")";
-        console.error(errorMessage);
+        this.dialogmanager.openDialog(errorMessage);
       }
     });
   }
@@ -39,7 +46,45 @@ export class ContentComponent implements OnInit{
     return this.list;
   }
 
-  public managerCreation(event:ToDoModel):void{
+  public createCard(event:ToDoModel):void{
     this.list.push(event);
+  }
+
+  public updateContent(event:ToDoModel):void{
+    this.httprequest.httpPutRequest(environment.serverUrl + "app/" + event.getId(),{text:event.getText(),completed:!event.getCompleted()}).subscribe({
+      next: (response:any) => {
+        let i:number = 0;
+        while(i < this.list.length && this.list[i].getId() !== event.getId()){
+          i++;
+        }
+        if(i < this.list.length){
+          this.list[i].setCompleted(!this.list[i].getCompleted());
+        }
+        this.dialogmanager.openDialog(response.message);
+      },
+      error: (error:HttpErrorResponse) => {
+        const errorMessage:string = error.statusText + " (" + error.status + ")";
+        this.dialogmanager.openDialog(errorMessage);
+      }
+    });
+  }
+
+  public deleteContent(event:string):void{
+    this.httprequest.httpDeleteRequest(environment.serverUrl + "app/" + event,{}).subscribe({
+      next: (response:any) => {
+        let i:number = 0;
+        while(i < this.list.length && this.list[i].getId() !== event){
+          i++;
+        }
+        if(i < this.list.length){
+          this.list.splice(i,1);
+        }
+        this.dialogmanager.openDialog(response.message);
+      },
+      error: (error:HttpErrorResponse) => {
+        const errorMessage:string = error.statusText + " (" + error.status + ")";
+        this.dialogmanager.openDialog(errorMessage);
+      }
+    });
   }
 }

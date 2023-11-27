@@ -1,5 +1,4 @@
-import {Component,Input,OnInit} from "@angular/core";
-import {NgForm} from "@angular/forms";
+import {Component,EventEmitter,Input,Output,OnInit} from "@angular/core";
 import {ToDoModel} from "../../models/todo";
 
 @Component({
@@ -10,12 +9,21 @@ import {ToDoModel} from "../../models/todo";
 
 export class CardComponent implements OnInit{
   @Input() todo:ToDoModel = new ToDoModel();
+  @Output() update:EventEmitter<ToDoModel>;
+  @Output() delete:EventEmitter<string>;
 
-  constructor(){}
+  constructor(){
+    this.update = new EventEmitter<ToDoModel>();
+    this.delete = new EventEmitter<string>();
+  }
 
   public ngOnInit():void{}
 
-  public completeTodo(form:NgForm):void{
-    console.log(form);
+  public updateTodo():void{
+    this.update.emit(this.todo);
+  }
+
+  public deleteTodo():void{
+    this.delete.emit(this.todo.getId());
   }
 }

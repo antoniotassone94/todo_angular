@@ -1,9 +1,10 @@
-import {Component,EventEmitter,OnInit,Output} from "@angular/core";
+import {Component,EventEmitter,OnInit,Output,inject} from "@angular/core";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {HttpRequestService} from "../../services/httprequest.service";
-import {environment} from "../../../environments/environment";
+import {DialogManagerService} from "../../services/dialogmanager.service";
 import {ToDoModel} from "../../models/todo";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: "app-create",
@@ -12,13 +13,19 @@ import {ToDoModel} from "../../models/todo";
 })
 
 export class CreateComponent implements OnInit{
-  @Output() todoCreated:EventEmitter<ToDoModel> = new EventEmitter<ToDoModel>();
+  @Output() todoCreated:EventEmitter<ToDoModel>;
+  private httprequest:HttpRequestService;
+  private dialogmanager:DialogManagerService;
 
-  constructor(private httprequest:HttpRequestService){}
+  constructor(){
+    this.todoCreated = new EventEmitter<ToDoModel>();
+    this.httprequest = inject(HttpRequestService);
+    this.dialogmanager = inject(DialogManagerService);
+  }
 
   public ngOnInit():void{}
 
-  public createnow(form:NgForm){
+  public createnow(form:NgForm):void{
     if(form.valid){
       this.httprequest.httpPostRequest(environment.serverUrl + "app",{text:form.value.text,completed:false}).subscribe({
         next: (response:any) => {
@@ -28,11 +35,11 @@ export class CreateComponent implements OnInit{
           todo.setId(response.result._id);
           todo.setV(response.result.__v);
           this.todoCreated.emit(todo);
-          console.log(response.message);
+          this.dialogmanager.openDialog(response.message);
         },
         error: (error:HttpErrorResponse) => {
           const errorMessage:string = error.statusText + " (" + error.status + ")";
-          console.error(errorMessage);
+          this.dialogmanager.openDialog(errorMessage);
         }
       });
     }
