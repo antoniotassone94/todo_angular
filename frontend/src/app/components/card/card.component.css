@@ -8,3 +8,17 @@ input{
     width: 20px;
     height: 20px;
 }
+
+.btn-delete{
+     border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn-delete img{
+   height: 35px;
+}
+
+.btn-delete img:hover{
+    color: red;
+ }
