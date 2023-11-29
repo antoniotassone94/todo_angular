@@ -1,3 +1,5 @@
-<p>{{todo.getText()}}</p>
-<input type="checkbox" name="completed" id="completed" class="checkbox" [ngModel]="todo.getCompleted()" (click)="updateTodo()">
-<button (click)="deleteTodo()" class="btn-delete"> <img src="../../../assets/images/garbit.png" alt=""></button>
+<div class="single-card" ([appCardBackground])="setBackground()">
+  <p>{{todo.getText()}}</p>
+  <input type="checkbox" [name]="getIdentifierCheckbox()" [id]="getIdentifierCheckbox()" class="checkbox" [ngModel]="todo.getCompleted()" (click)="updateTodo()">
+  <button (click)="deleteTodo()" class="btn-delete"><mat-icon svgIcon="trash"></mat-icon></button>
+</div>

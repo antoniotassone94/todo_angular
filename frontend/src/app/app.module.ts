@@ -14,12 +14,15 @@ import {ModalMessageComponent} from "./components/modalmessage/modalmessage.comp
 import {DialogManagerService} from "./services/dialogmanager.service";
 import {HttpRequestService} from "./services/httprequest.service";
 
+import {CardBackgroundDirective} from "./directives/cardbackground.directive";
+
 @NgModule({
   declarations: [
     CardComponent,
     CreateComponent,
     ContentComponent,
-    ModalMessageComponent
+    ModalMessageComponent,
+    CardBackgroundDirective
   ],
   imports: [
     AppRoutingModule,

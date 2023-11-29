@@ -1,4 +1,6 @@
-import {Component,EventEmitter,Input,Output,OnInit} from "@angular/core";
+import {Component,EventEmitter,Input,Output,OnInit, ViewChild, ElementRef} from "@angular/core";
+import {MatIconRegistry} from "@angular/material/icon";
+import {DomSanitizer,SafeResourceUrl} from "@angular/platform-browser";
 import {ToDoModel} from "../../models/todo";
 
 @Component({
@@ -12,9 +14,15 @@ export class CardComponent implements OnInit{
   @Output() update:EventEmitter<ToDoModel>;
   @Output() delete:EventEmitter<string>;
 
-  constructor(){
+  constructor(private registryIcon:MatIconRegistry,private dom:DomSanitizer){
     this.update = new EventEmitter<ToDoModel>();
     this.delete = new EventEmitter<string>();
+    const urlSafe:SafeResourceUrl = this.dom.bypassSecurityTrustResourceUrl("assets/images/trashIcon.svg");
+    this.registryIcon.addSvgIcon("trash",urlSafe);
+  }
+
+  public getIdentifierCheckbox():string{
+    return "completed_" + this.todo.getId();
   }
 
   public ngOnInit():void{}
@@ -25,5 +33,9 @@ export class CardComponent implements OnInit{
 
   public deleteTodo():void{
     this.delete.emit(this.todo.getId());
+  }
+
+  public setBackground():boolean{
+    return this.todo.getCompleted();
   }
 }
