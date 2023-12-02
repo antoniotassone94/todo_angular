@@ -26,9 +26,9 @@ export class CardStyleDirective implements OnInit{
 
   private updateStyle():void{
     if(this.appCardStyle === true){
-      this.htmlElement.nativeElement.style.backgroundColor = "green";
+      this.htmlElement.nativeElement.style.textDecoration = "line-through";
     }else{
-      this.htmlElement.nativeElement.style.backgroundColor = "red";
+      this.htmlElement.nativeElement.style.textDecoration = "";
     }
   }
 }
