@@ -4,7 +4,8 @@
   "description": "backend for the application to manage a todo list.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts"
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts"
   },
   "author": "Antonio Tassone and Rafael Merlotto",
   "license": "ISC",
