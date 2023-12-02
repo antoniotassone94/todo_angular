@@ -3,7 +3,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {HttpRequestService} from "../../services/httprequest.service";
 import {DialogManagerService} from "../../services/dialogmanager.service";
-import {ToDoModel} from "../../models/todo";
+import {ToDoModel} from "../../models/todo.model";
 import {environment} from "../../../environments/environment";
 
 @Component({
@@ -30,10 +30,10 @@ export class CreateComponent implements OnInit{
       this.httprequest.httpPostRequest(environment.serverUrl + "app",{text:form.value.text,completed:false}).subscribe({
         next: (response:any) => {
           const todo:ToDoModel = new ToDoModel();
-          todo.setText(response.result.text);
-          todo.setCompleted(response.result.completed);
-          todo.setId(response.result._id);
-          todo.setV(response.result.__v);
+          todo.text = response.result.text;
+          todo.completed = response.result.completed;
+          todo.id = response.result._id;
+          todo.v = response.result.__v;
           this.todoCreated.emit(todo);
           this.dialogmanager.openDialog(response.message);
         },

@@ -1,6 +1,6 @@
-import dbConnect from "../config/dbConnect";
-import {App,AppSchema} from "../models/model";
-import validateMongodb from "../utils/validateMongodb";
+import dbConnect from "./database/connection";
+import {App,AppSchema} from "./database/model";
+import validateMongodb from "./database/utility";
 
 export async function createContent(text:string,completed:boolean):Promise<AppSchema|null>{
     await dbConnect();

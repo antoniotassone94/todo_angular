@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {app} from "../app";
+import {app} from "../app_routes";
 import dotenv from "dotenv";
 
 async function dbConnect() {

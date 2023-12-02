@@ -1,7 +1,7 @@
-import {Component,EventEmitter,Input,Output,OnInit, ViewChild, ElementRef} from "@angular/core";
+import {Component,EventEmitter,Input,Output,OnInit} from "@angular/core";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer,SafeResourceUrl} from "@angular/platform-browser";
-import {ToDoModel} from "../../models/todo";
+import {ToDoModel} from "../../models/todo.model";
 
 @Component({
   selector: "app-card",
@@ -22,7 +22,7 @@ export class CardComponent implements OnInit{
   }
 
   public getIdentifierCheckbox():string{
-    return "completed_" + this.todo.getId();
+    return "completed_" + this.todo.id;
   }
 
   public ngOnInit():void{}
@@ -32,10 +32,6 @@ export class CardComponent implements OnInit{
   }
 
   public deleteTodo():void{
-    this.delete.emit(this.todo.getId());
-  }
-
-  public setBackground():boolean{
-    return this.todo.getCompleted();
+    this.delete.emit(this.todo.id);
   }
 }

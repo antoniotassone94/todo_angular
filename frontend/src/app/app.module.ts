@@ -11,10 +11,11 @@ import {CreateComponent} from "./components/create/create.component";
 import {ContentComponent} from "./components/content/content.component";
 import {ModalMessageComponent} from "./components/modalmessage/modalmessage.component";
 
+import {CompleteTodoService} from "./services/completetodo.service";
 import {DialogManagerService} from "./services/dialogmanager.service";
 import {HttpRequestService} from "./services/httprequest.service";
 
-import {CardBackgroundDirective} from "./directives/cardbackground.directive";
+import {CardStyleDirective} from "./directives/cardstyle.directive";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {CardBackgroundDirective} from "./directives/cardbackground.directive";
     CreateComponent,
     ContentComponent,
     ModalMessageComponent,
-    CardBackgroundDirective
+    CardStyleDirective
   ],
   imports: [
     AppRoutingModule,
@@ -33,6 +34,7 @@ import {CardBackgroundDirective} from "./directives/cardbackground.directive";
     MaterialModule
   ],
   providers: [
+    CompleteTodoService,
     DialogManagerService,
     HttpRequestService
   ],
