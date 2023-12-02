@@ -1,5 +1,5 @@
-<div class="single-card" ([appCardBackground])="setBackground()">
-  <p>{{todo.getText()}}</p>
-  <input type="checkbox" [name]="getIdentifierCheckbox()" [id]="getIdentifierCheckbox()" class="checkbox" [ngModel]="todo.getCompleted()" (click)="updateTodo()">
+<div class="single-card" [appCardStyle]="todo.completed" [todoId]="todo.id">
+  <p>{{todo.text}}</p>
+  <input type="checkbox" [name]="getIdentifierCheckbox()" [id]="getIdentifierCheckbox()" class="checkbox" [ngModel]="todo.completed" (click)="updateTodo()">
   <button (click)="deleteTodo()" class="btn-delete"><mat-icon svgIcon="trash"></mat-icon></button>
 </div>

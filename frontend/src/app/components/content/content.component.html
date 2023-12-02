@@ -1,5 +1,5 @@
 <ul class="list">
-  <li class="content" *ngFor="let card of getList()">
+  <li class="content" *ngFor="let card of list">
     <app-card
       [todo]="card"
       (update)="updateContent($event)"

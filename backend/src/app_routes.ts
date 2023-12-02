@@ -1,6 +1,6 @@
 import express,{Router} from "express";
-import {createContent,deleteContent,getContents,updateContent} from "./services/appService";
-import {AppSchema} from "./models/model";
+import {createContent,deleteContent,getContents,updateContent} from "./app_functions";
+import {AppSchema} from "./database/model";
 
 const app: Router = express.Router();
 

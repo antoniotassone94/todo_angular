@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
+import {Injectable,inject} from "@angular/core";
 import {MatDialog,MatDialogRef} from "@angular/material/dialog";
-import {MessageType} from "../models/servermessage";
+import {MessageType} from "../models/servermessage.model";
 import {ModalMessageComponent} from "../components/modalmessage/modalmessage.component";
 
 @Injectable({
@@ -8,13 +8,17 @@ import {ModalMessageComponent} from "../components/modalmessage/modalmessage.com
 })
 
 export class DialogManagerService{
-  constructor(private dialog:MatDialog){}
+  private dialog:MatDialog
+
+  constructor(){
+    this.dialog = inject(MatDialog);
+  }
 
   public openDialog(messageToPrint:string):void{
     if(messageToPrint && messageToPrint !== ""){
       const message:MessageType = new MessageType();
-      message.setIdMessage(new Date().getTime());
-      message.setTextMessage(messageToPrint);
+      message.idMessage = new Date().getTime();
+      message.textMessage = messageToPrint;
       this.dialog.open(ModalMessageComponent,{
         data:message
       });
