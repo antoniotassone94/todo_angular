@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import {app} from "../app_routes";
 import dotenv from "dotenv";
 
 async function dbConnect() {
   dotenv.config();
-  await mongoose.connect(<string>process.env.DB_CONN_STRING)
-  .then(() => {
-    app.connect("Connection with the database is created correctly.");
-  })
-  .catch(error => console.error(error));
+  try{
+    mongoose.set("strictQuery",true);
+    await mongoose.connect(<string>process.env.DB_CONN_STRING)
+  }catch(error){
+    console.error(error);
+  }
 }
 
 export default dbConnect

@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 import {app} from "./app_routes";
+
+dotenv.config();
 
 const server = express();
 server.use(cors());
@@ -14,6 +18,12 @@ server.get("/",(req,res) => {
 
 const PORT = 4000;
 
-server.listen(PORT,() => {
-    console.log(`server is running on the port ${PORT} 🚀`)
-});
+mongoose.set("strictQuery",true);
+mongoose.connect(<string>process.env.DB_CONN_STRING)
+.then(() => {
+    server.listen(PORT,() => {
+        console.log(`server is running on the port ${PORT} 🚀`)
+    });
+})
+
+export {server}
