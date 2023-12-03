@@ -26,3 +26,7 @@
   background:linear-gradient(90deg, rgb(39, 207, 81) 0%, rgba(106,255,118,1) 100%);
   cursor:pointer;
 }
+
+:focus{
+  outline:none;
+}
