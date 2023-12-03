@@ -25,5 +25,4 @@ mongoose.connect(<string>process.env.DB_CONN_STRING)
         console.log(`server is running on the port ${PORT} 🚀`)
     });
 })
-
-export {server}
+.catch(error => console.error(error))
